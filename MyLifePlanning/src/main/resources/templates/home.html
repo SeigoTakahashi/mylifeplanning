@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<title>My Life Planning</title>
+	<meta charset="utf-8" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+	<link rel="icon" th:href="@{/favicon/favicon-32x32.ico}" />
+	<link rel="apple-touch-icon" th:href="@{/favicon/favicon-256x256.ico}" />
+	<link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+</head>
+
+<body id="home-body">
+	<div id="splash">
+		<div id="splash-logo" class="kaushan-script-regular">My Life Planning</div>
+		<!--/splash-->
+	</div>
+	<div id="home-container">
+		<div class="header">
+			<div class="header-content">
+				<div class="header-title">
+					<p>My Life Planning</p>
+				</div>
+				<div class="header-menu">
+					<ul>
+						<li><a th:href="@{/login}" class="btnlinestretches2">Sign In</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="text-area">
+			<p class="text-zone">人間は、目標を追い求める動物である。<br>目標へ到達しようと努力することによってのみ、<br>人生が意味あるものとなる。</p>
+			<p class="author">ーアリストテレス</p>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+	<script th:src="@{js/home.js}"></script>
+</body>
+
+
+</html>

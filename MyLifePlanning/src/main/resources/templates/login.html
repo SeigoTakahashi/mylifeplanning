@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>My Life Planning</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+	<link rel="icon" th:href="@{/favicon/favicon-32x32.ico}" />
+	<link rel="apple-touch-icon" th:href="@{/favicon/favicon-256x256.ico}" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<th:block th:if="${error == 'already'}">
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelector('body').classList.add('appear');
+			Swal.fire({
+				title: '登録エラー',
+				text: 'ユーザー名が既に登録されています',
+				icon: "error",
+				confirmButtonColor : '#3085d6'
+			});
+			registerFormView();
+		});
+	</script>
+</th:block>
+<th:block th:if="${error == 'confirm'}">
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelector('body').classList.add('appear');
+			Swal.fire({
+				title: '登録エラー',
+				html: 'パスワードが一致しません',
+				icon: 'error',
+				confirmButtonColor : '#3085d6'
+			});
+			registerFormView();
+		});
+	</script>
+</th:block>
+
+<th:block th:if="${error == 'invalid'}">
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelector('body').classList.add('appear');
+			Swal.fire({
+				title: "ログインエラー",
+				text: "ユーザー名またはパスワードが違います",
+				icon: "error",
+				confirmButtonColor : '#3085d6'
+			});
+			loginFormView();
+		});
+	</script>
+</th:block>
+
+<body id="login-body">
+	<div id="container">
+
+		<div class="login-page">
+			<div class="form" id="myform">
+				<form class="register-form" id="register-form" th:action="@{/register}" method="POST">
+					<input type="text" name="username" placeholder="ユーザー名" aria-describedby="usernameTooltip">
+					<span id="usernameTooltip" class="tooltip">ユーザー名は最大16文字です</span>
+					<input type="password" name="password" placeholder="パスワード" aria-describedby="passwordTooltip" />
+					<span id="passwordTooltip" class="tooltip">パスワードは最大16文字です</span>
+					<input type="password" name="confirm" placeholder="確認用パスワード" aria-describedby="confirmTooltip" />
+					<span id="confirmTooltip" class="tooltip">パスワードを再入力してください</span>
+					<input type="date" name="birthday" placeholder="誕生日" aria-describedby="birthdayTooltip" />
+					<span id="birthdayTooltip" class="tooltip">誕生日を入力してください</span>
+					<button>新規登録</button>
+					<p class="message">既にアカウントがある <a onclick="loginFormView()">ログイン</a></p>
+				</form>
+				<form class="login-form" id="login-form" th:action="@{/login}" method="POST">
+					<input type="text" name="username" placeholder="ユーザー名" />
+					<input type="password" name="password" placeholder="パスワード" />
+					<button>ログイン</button>
+					<p class="message">アカウントを持っていない <a onclick="registerFormView()">新規登録</a></p>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script th:src="@{js/login.js}"></script>
+</body>
+
+</html>

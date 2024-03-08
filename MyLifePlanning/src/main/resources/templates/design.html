@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<title>My Life Planning</title>
+	<meta charset="utf-8" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+	<link rel="icon" th:href="@{/favicon/favicon-32x32.ico}" />
+	<link rel="apple-touch-icon" th:href="@{/favicon/favicon-256x256.ico}" />
+	<link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body id="design-body">
+	<div id="splash">
+		<div id="splash-logo" class="kaushan-script-regular">My Life Planning</div>
+		<!--/splash-->
+	</div>
+	<div id="design-container">
+		<div class="header">
+			<div class="header-content">
+				<div class="header-title">
+					<p>My Life Planning</p>
+				</div>
+				<div class="header-menu">
+					<ul>
+						<li><a th:href="@{/logout}" class="btnlinestretches2" onclick="logout(event);">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="design-area">
+			<div class="design-title">
+				<h1>My Life Planning</h1>
+			</div>
+			<ul class="accordion-area" id="accordion">
+				<th:block th:each="i : ${#numbers.sequence(0, 110,10)}">
+					<li>
+						<section>
+							<h3 class="title large" th:text="${i+'代'}"></h3>
+							<div class="box">
+								<ul class="accordion-area" id="subAccordion">
+									<th:block th:each="j : ${#numbers.sequence(i, i+9)}">
+										<li>
+											<section>
+												<h3 class="title" th:text="${j+'歳 ('+(j+session.year)+'年)'}"></h3>
+												<div class="box in">
+													<ul class="goal-list" th:id="${j+'-text'}">
+														<li th:each="goal : ${goals}" th:if="${goal.year} == ${j}">
+															<p th:text="${goal.contents}"></p>
+														</li>
+
+													</ul>
+													<button class="add-button" th:id="${j+'-add'}"
+                                                        th:onclick="'add('+${j}+');'">+</button>
+													<div class="input-area" th:id="${j+'-inputarea'}">
+														<textarea rows="4" th:id="${j+'-textarea'}"
+															th:placeholder="${j+'歳の目標(最大255文字)'}"></textarea>
+														<button class="save-button" th:id="${j+'-button'}"
+															th:onclick="'save('+${j}+');'">保存</button>
+													</div>
+												</div>
+											</section>
+										</li>
+								</ul>
+							</div>
+						</section>
+					</li>
+			</ul>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+	<script th:src="@{js/design.js}"></script>
+	<script th:src="@{js/login.js}"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,495 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.login-page {
+	width: 360px;
+	padding: 8% 0 0;
+	margin: auto;
+}
+
+.form {
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #4CAF50;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+	background: #43A047;
+}
+
+.form .message {
+	margin: 15px 0 0;
+	color: #b3b3b3;
+	font-size: 12px;
+}
+
+.form .message a {
+	color: #4CAF50;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.form .register-form {
+	display: none;
+}
+
+.form .login-form {
+	display: block;
+}
+
+body {
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#login-body {
+	background: #76b852;
+}
+
+#home-body {
+	background: white;
+}
+
+
+/*========= ローディング画面のためのCSS ===============*/
+#splash {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: white;
+	z-index: 9999999;
+	text-align: center;
+	color: black;
+}
+
+#splash-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/*========= 画面遷移のためのCSS ===============*/
+
+/*画面遷移アニメーション*/
+.splashbg {
+	display: none;
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear .splashbg {
+	display: block;
+	content: "";
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	transform: scaleY(0);
+	background-color: white;
+	/*伸びる背景色の設定*/
+	animation-name: PageAnime;
+	animation-duration: 1.0s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+
+@keyframes PageAnime {
+	0% {
+		transform-origin: top;
+		transform: scaleY(0);
+	}
+
+	50% {
+		transform-origin: top;
+		transform: scaleY(1);
+	}
+
+	50.001% {
+		transform-origin: bottom;
+	}
+
+	100% {
+		transform-origin: bottom;
+		transform: scaleY(0);
+	}
+}
+
+/*画面遷移の後現れるコンテンツ設定*/
+#container {
+	opacity: 0;
+	/*はじめは透過0に*/
+	height: 100vh;
+}
+
+#home-container {
+	opacity: 0;
+	background-attachment: fixed;
+	background-image: url(../image/human.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.text-zone {
+	position: relative;
+	font-size: 18px;
+	color: #fff;
+	font-weight: bold;
+	font-family: 'ヒラギノ明朝 ProN', 'klee', 'Hannotate SC', 'Meiryo UI', cursive;
+	font-style: normal;
+}
+
+.text-area {
+	margin-top: 10%;
+	padding: 1% 0;
+	position: absolute;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+}
+
+.author {
+	text-align: right;
+	font-family: 'ヒラギノ明朝 ProN', 'klee', 'Hannotate SC', 'Meiryo UI', cursive;
+	color: #fff;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+body.appear #home-container {
+	animation-name: PageAnimeAppear;
+	animation-duration: 0.8s;
+	animation-delay: 0.6s;
+	animation-fill-mode: forwards;
+	opacity: 0;
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container {
+	animation-name: PageAnimeAppear;
+	animation-duration: 0.8s;
+	animation-delay: 0.6s;
+	animation-fill-mode: forwards;
+	opacity: 0;
+}
+
+@keyframes PageAnimeAppear {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.kaushan-script-regular {
+	font-family: "Kaushan Script", cursive;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 100px;
+}
+
+.tooltip {
+	visibility: hidden;
+	background-color: gray;
+	color: white;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+}
+
+input:focus+.tooltip {
+	visibility: visible;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #333;
+	color: white;
+	z-index: 100;
+	padding: 2% 3%;
+}
+
+.header-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header-title p {
+	font-family: 'Kaushan Script', cursive;
+	margin: 0;
+	font-size: 24px;
+}
+
+.header-menu {
+	margin-right: 5%;
+	padding: 0.5%;
+	border-radius: 5px;
+}
+
+.header-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.header-menu ul li {
+	display: inline;
+	margin-left: 20px;
+}
+
+.header-menu ul li:first-child {
+	margin-left: 0;
+}
+
+.header-menu ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.design-area {
+	padding-top: 10%;
+	text-align: center;
+}
+
+.btnlinestretches2 {
+	/*線の基点とするためrelativeを指定*/
+	position: relative;
+	/*ボタンの形状*/
+	color: white;
+	padding: 10px 30px;
+	display: inline-block;
+	text-decoration: none;
+	outline: none;
+}
+
+/*線の設定*/
+.btnlinestretches2::before,
+.btnlinestretches2::after {
+	content: '';
+	/*絶対配置で線の位置を決める*/
+	position: absolute;
+	/*事前に出現させる線の形状*/
+	border: solid #dcdcdc;
+	/*線の太さの指定*/
+	width: 10px;
+	height: 10px;
+	/*アニメーションの指定*/
+	transition: all 0.3s ease-in-out;
+	border-radius: 3px;
+}
+
+.btnlinestretches2::before {
+	/*事前に出現させる線の位置*/
+	top: 0;
+	left: 0;
+	/*事前に出現させる線の形状*/
+	border-width: 2px 0 0 2px;
+}
+
+.btnlinestretches2::after {
+	/*事前に出現させる線の位置*/
+	bottom: 0;
+	right: 0;
+	/*事前に出現させる線の形状*/
+	border-width: 0 2px 2px 0;
+}
+
+/*hoverした際の線の形状*/
+.btnlinestretches2:hover::before,
+.btnlinestretches2:hover::after {
+	width: calc(100% - 2px);
+	height: calc(100% - 2px);
+	border-color: #dcdcdc;
+}
+
+/*アコーディオン全体*/
+.accordion-area {
+	list-style: none;
+	width: 96%;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.accordion-area li {
+	margin: 10px 0;
+}
+
+.accordion-area section {
+	border: 1px solid #ccc;
+}
+
+/*アコーディオンタイトル*/
+.title {
+	position: relative;
+	/*+マークの位置基準とするためrelative指定*/
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: normal;
+	padding: 3% 3% 3% 50px;
+	transition: all .5s ease;
+}
+
+/*アイコンの＋と×*/
+.title::before,
+.title::after {
+	position: absolute;
+	content: '';
+	width: 15px;
+	height: 2px;
+	background-color: #333;
+
+}
+
+.title::before {
+	top: 48%;
+	left: 15px;
+	transform: rotate(0deg);
+
+}
+
+.title::after {
+	top: 48%;
+	left: 15px;
+	transform: rotate(90deg);
+
+}
+
+/*　closeというクラスがついたら形状変化　*/
+.title.close::before {
+	transform: rotate(45deg);
+}
+
+.title.close::after {
+	transform: rotate(-45deg);
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+	display: none;
+	/*はじめは非表示*/
+	margin: 0 3% 3% 3%;
+	padding: 3%;
+}
+
+.in textarea {
+	width: 100%;
+	resize: none;
+	border: 1px solid #ccc;
+}
+
+.save-button {
+	float: right;
+	padding: 0.5% 1%;
+	font-weight: bold;
+	border: 2px solid #27acd9;
+	color: #27acd9;
+	transition: 0.5s;
+	border-radius: 3px;
+	background-color: white;
+}
+
+.save-button:hover {
+	background-color: #27acd9;
+	color: white;
+}
+
+.text-area {
+	width: 100%;
+}
+	
+.goal-list {
+	width: 100%;
+	text-align: left;
+}
+
+.add-button {
+	float: right;
+	padding: 0.5% 1%;
+	font-weight: bold;
+	border: 2px solid #98fb98;
+	color: #98fb98;
+	transition: 0.5s;
+	border-radius: 3px;
+	background-color: white;
+	margin-bottom: 1%;
+}
+
+.add-button:hover {
+	background-color: #98fb98;
+	color: white;
+}
+
+.input-area {
+	display: none;
+}
+
+.close-button {
+	border: 2px solid #e95464;
+	color: #e95464;
+}
+
+.close-button:hover {
+	background-color: #e95464;
+	color: white;
+}
+
+.design-title {
+	font-family: 'Kaushan Script', cursive;
+}
+
+
